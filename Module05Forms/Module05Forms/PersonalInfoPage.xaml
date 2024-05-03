@@ -1,0 +1,115 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Module05Forms.PersonalInfoPage">
+
+    <StackLayout Margin="10" Padding="20">
+
+        <Label Text="Personal Information Page" 
+               FontAttributes="Bold"
+               FontSize="Title"
+               HorizontalOptions="Center"
+               TextColor="Black"/>
+
+        <Entry x:Name="FirstName" 
+               Placeholder="First Name" />
+
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            
+            <Entry x:Name="MiddleName" 
+                   Placeholder="Middle Name" 
+                   IsEnabled="False" 
+                   Grid.ColumnSpan="6">
+
+                <Entry.Triggers>
+                    <DataTrigger TargetType="Entry"
+                                 Binding="{Binding Source={x:Reference actionSwitch}, Path=IsToggled}" 
+                                 Value="True">
+                        <Setter Property="IsEnabled"
+                                Value="True"/>
+                    </DataTrigger>
+                </Entry.Triggers>
+            </Entry>
+
+            <Switch x:Name="actionSwitch" 
+                        IsToggled="True" 
+                        HorizontalOptions="Center" 
+                        VerticalOptions="CenterAndExpand" 
+                        Grid.Column="6">
+                <VisualStateManager.VisualStateGroups>
+                    <VisualStateGroup x:Name="CommonState">
+                        <VisualState x:Name="Off">
+                            <VisualState.Setters>
+                                <Setter Property="ThumbColor"
+                                            Value="SteelBlue"/>
+                                <Setter Property="OnColor"
+                                            Value="LightGray"/>
+                            </VisualState.Setters>
+                        </VisualState>
+
+                        <VisualState x:Name="On">
+                            <VisualState.Setters>
+                                <Setter Property="ThumbColor"
+                                            Value="SteelBlue"/>
+                                <Setter Property="OnColor"
+                                            Value="LightSteelBlue"/>
+                            </VisualState.Setters>
+                        </VisualState>
+                    </VisualStateGroup>
+                </VisualStateManager.VisualStateGroups>
+            </Switch>
+        </Grid>
+                
+        <Entry Placeholder="Last Name" />
+        
+        <Picker Title="Gender">
+
+            <Picker.ItemsSource>
+                <x:Array Type="{x:Type x:String}">
+                    <x:String>Male</x:String>
+                    <x:String>Female</x:String>
+                    <x:String>Other</x:String>
+                </x:Array>
+            </Picker.ItemsSource>
+        </Picker>
+
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <DatePicker Grid.ColumnSpan="2" 
+                        DateSelected="OnDateSelected" />
+            <Label Text="Age"
+                   x:Name="Age"
+                   FontSize="Medium"
+                   FontAttributes="Bold"
+                   Grid.Column="2" />
+        </Grid>
+
+        <Entry Placeholder="Address" />
+        
+        <Entry Placeholder="Contact Number" 
+               Keyboard="Telephone" />
+        
+        <Entry Placeholder="Email" 
+               Keyboard="Email" />
+        
+        <Entry Placeholder="Username" />
+        
+        <Entry Placeholder="Password" 
+               IsPassword="True" />
+        
+        <Entry Placeholder="Repeat Password" 
+               IsPassword="True" />
+        
+        <Button Text="Submit"
+                TextColor="White"
+                BackgroundColor="SteelBlue"
+                CornerRadius="8"/>
+    </StackLayout>
+</ContentPage>
